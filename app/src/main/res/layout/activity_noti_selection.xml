@@ -29,14 +29,6 @@
             tools:layout_editor_absoluteY="239dp" />
 
         <CheckBox
-            android:id="@+id/A2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="A2"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="271dp" />
-
-        <CheckBox
             android:id="@+id/speed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

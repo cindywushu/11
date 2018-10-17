@@ -16,7 +16,6 @@ public class Noti_selectionActivity extends AppCompatActivity {
     CheckBox speednoticheck;
     Boolean all;
     Boolean A1;
-    Boolean A2;
     Boolean speednoti;
 
     @Override
@@ -26,17 +25,15 @@ public class Noti_selectionActivity extends AppCompatActivity {
 
         allcheck = (CheckBox)findViewById(R.id.all);
         A1check = (CheckBox)findViewById(R.id.A1);
-        A2check = (CheckBox)findViewById(R.id.A2);
         speednoticheck = (CheckBox)findViewById(R.id.speed);
     }
 
     public void goto_Map(View view) {
         all = allcheck.isChecked();
         A1 = A1check.isChecked();
-        A2 = A2check.isChecked();
         speednoti = speednoticheck.isChecked();
 
-        if (!all && !A1 && !A2 && !speednoti){ //若勾選為空
+        if (!all && !A1 && !speednoti){ //若勾選為空
             AlertDialog.Builder builder = new AlertDialog.Builder(Noti_selectionActivity.this);
             builder.setTitle("注意！")
                     .setMessage("請選擇服務項目！")
@@ -47,7 +44,7 @@ public class Noti_selectionActivity extends AppCompatActivity {
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-        }else if (all&&(A1 || A2 || speednoti)){ //若勾選為全部及其他選項
+        }else if (all&&(A1 || speednoti)){ //若勾選為全部及其他選項
             AlertDialog.Builder builder = new AlertDialog.Builder(Noti_selectionActivity.this);
             builder.setTitle("注意！")
                     .setMessage("已重複選擇，請更改！")
@@ -62,7 +59,6 @@ public class Noti_selectionActivity extends AppCompatActivity {
             Intent intent=new Intent(Noti_selectionActivity.this,MapsActivity.class);
             intent.putExtra("all", all);
             intent.putExtra("A1", A1);
-            intent.putExtra("A2", A2);
             intent.putExtra("speednoti", speednoti);
             startActivity(intent);
         }

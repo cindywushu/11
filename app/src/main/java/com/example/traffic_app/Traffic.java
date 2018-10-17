@@ -8,6 +8,7 @@ public class Traffic {
     /**
      * id : 0
      * time : 舒婷測試
+     * time-slot : 早
      * place : 北商
      * nums : null
      * sort : null
@@ -15,18 +16,19 @@ public class Traffic {
      * latitude : 25.0423
      * category : A2
      * direction : 北向
-     * mini-bus :
-     * bus :
-     * small-truck :
-     * big-truck : 1
-     * semi-joined-car :
-     * fully-connected-car :
-     * traction-car :
-     * time-slot : 早
+     * minibus : 0
+     * bus : 0
+     * smalltruck : 0
+     * bigtruck : 1
+     * semijoinedcar : 0
+     * fullyconnectedcar : 0
+     * tractioncar : 0
      */
 
     private String id;
     private String time;
+    @SerializedName("time-slot")
+    private String timeslot;
     private String place;
     private Object nums;
     private Object sort;
@@ -34,21 +36,13 @@ public class Traffic {
     private String latitude;
     private String category;
     private String direction;
-    @SerializedName("mini-bus")
     private String minibus;
     private String bus;
-    @SerializedName("small-truck")
     private String smalltruck;
-    @SerializedName("big-truck")
     private String bigtruck;
-    @SerializedName("semi-joined-car")
     private String semijoinedcar;
-    @SerializedName("fully-connected-car")
     private String fullyconnectedcar;
-    @SerializedName("traction-car")
     private String tractioncar;
-    @SerializedName("time-slot")
-    private String timeslot;
 
     public String getId() {
         return id;
@@ -64,6 +58,14 @@ public class Traffic {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTimeslot() {
+        return timeslot;
+    }
+
+    public void setTimeslot(String timeslot) {
+        this.timeslot = timeslot;
     }
 
     public String getPlace() {
@@ -176,13 +178,5 @@ public class Traffic {
 
     public void setTractioncar(String tractioncar) {
         this.tractioncar = tractioncar;
-    }
-
-    public String getTimeslot() {
-        return timeslot;
-    }
-
-    public void setTimeslot(String timeslot) {
-        this.timeslot = timeslot;
     }
 }

@@ -83,7 +83,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int NOTIF_ID = 1;
     Boolean all=false;//全部勾選預設為false
     Boolean A1=false;//A1勾選預設為false
-    Boolean A2=false;//A2勾選預設為false
     Boolean speednoti=false;//超速提醒勾選預設為false
 
     ObjectAnimator anim;
@@ -108,7 +107,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //取得MainActivity的勾選值(是否有勾選)
         all = getIntent().getExtras().getBoolean("all");
         A1 = getIntent().getExtras().getBoolean("A1");
-        A2 = getIntent().getExtras().getBoolean("A2");
         speednoti = getIntent().getExtras().getBoolean("speednoti");
 
         //執行尋找資料庫的點及通知
@@ -364,7 +362,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //計算距離
                         distance = (yourposition_location.distanceTo(dbposition_location));
 
-                        if (all||(A1&&A2)){ //若勾選全部或A1及A2
+                        if (all){ //若勾選全部或A1及A2
                             if (TrafficData.get(i).getCategory().equals("A1")||TrafficData.get(i).getCategory().equals("A2")){
                                 if (distance<500){ //顯示所有距離500m內的點
                                     MapsActivity.distancetext.setText("離危險路段距離約: " + new DecimalFormat("#.##").format(distance) + "公尺");
@@ -398,23 +396,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     manageBlinkEffect();
                                 }
                             }
-                        }else if (A2){ //若勾選A2
-                            if (TrafficData.get(i).getCategory().equals("A2")){
-                                if (distance<500){ //顯示所有距離500m內的點
-                                    MapsActivity.distancetext.setText("離危險路段距離約: " + new DecimalFormat("#.##").format(distance) + "公尺");
-                                    addMarker_ORANGE(); //A2類顯示橘點
-                                    if (TrafficData.get(i).getDirection().equals("北向")) {
-                                        notification_north(); //北向提醒通知
-                                    }else if (TrafficData.get(i).getDirection().equals("南向")){
-                                        notification_south(); //南向提醒通知
-                                    }
-                                }
-                                if (distance<100){ //距離100m以內螢幕閃爍
-                                    manageBlinkEffect();
-                                }
-                            }
                         }
-
                     }
 
                 } catch (Exception e) {
