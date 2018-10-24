@@ -4,15 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_main_background"
     tools:context=".InquireActivity">
 
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="319dp"
+        android:layout_width="344dp"
+        android:layout_height="420dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:alpha="0.9"
+        android:background="#dddbdb"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,15 +31,18 @@
 
             <TextView
                 android:id="@+id/text2"
-                android:layout_width="8dp"
+                android:layout_width="9dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="目的地：" />
+                android:text="目的地："
+                android:textAlignment="viewStart"
+                android:textColor="#000000"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/destination"
-                android:layout_width="wrap_content"
+                android:layout_width="163dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
@@ -38,10 +51,13 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="138dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center"
-            android:text="請選擇查詢車種：" />
+            android:text="請選擇查詢車種："
+            android:textAlignment="viewStart"
+            android:textColor="#000000"
+            android:textSize="14sp" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -50,10 +66,13 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="138dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center"
-            android:text="請選擇查詢時段：" />
+            android:text="請選擇查詢時段："
+            android:textAlignment="viewStart"
+            android:textColor="#000000"
+            android:textSize="14sp" />
 
         <Spinner
             android:id="@+id/spinnertime"
@@ -64,11 +83,32 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#666666"
             android:onClick="goto_Map"
             android:text="開始查詢"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="62dp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="請選擇欲查詢之危險路段條件"
+        android:textAlignment="viewStart"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </android.support.constraint.ConstraintLayout>

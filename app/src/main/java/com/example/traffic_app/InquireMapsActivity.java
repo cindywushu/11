@@ -453,7 +453,7 @@ public class InquireMapsActivity extends FragmentActivity implements OnMapReadyC
                     List<Traffic> TrafficData = response.body();
 
                     for (int i = 0;i <= TrafficData.size();i++) {
-                        
+
                         int j=0;
                         if (carselected.equals("全部")){
                             j=i;
@@ -488,11 +488,11 @@ public class InquireMapsActivity extends FragmentActivity implements OnMapReadyC
 
                         if (TrafficData.get(k).getCategory().equals("A1")){
                             dbposition = new LatLng(Double.valueOf(TrafficData.get(k).getLatitude()), Double.valueOf(TrafficData.get(i).getLongitude()));
-                            mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(dbposition).title("A1類").icon(BitmapDescriptorFactory
+                            mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(dbposition).title(TrafficData.get(k).getId()).icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_RED)));//Mark資料庫的點 HUE_RED/HUE_ORANGE
                         }else if (TrafficData.get(k).getCategory().equals("A2")){
                             dbposition = new LatLng(Double.valueOf(TrafficData.get(k).getLatitude()), Double.valueOf(TrafficData.get(i).getLongitude()));
-                            mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(dbposition).title("A2類").icon(BitmapDescriptorFactory
+                            mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(dbposition).title(TrafficData.get(k).getId()).icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));//Mark資料庫的點 HUE_RED/HUE_ORANGE
                         }
                     }
