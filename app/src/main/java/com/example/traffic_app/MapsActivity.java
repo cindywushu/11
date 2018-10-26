@@ -539,41 +539,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent=new Intent(MapsActivity.this,Noti_selectionActivity.class);
         startActivity(intent);
     }
-
-//    /********定時器*******/
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        startTimer();
-//    }
-//
-//    Timer timer;
-//    java.util.TimerTask timerTask;
-//
-//    final Handler handler = new Handler();
-//
-//    public void startTimer() {
-//        timer = new Timer();
-//        initializeTimerTask();
-//        //第一次執行3秒, 之後每隔2秒執行一次
-//        timer.schedule(timerTask, 2000, 1000);
-//    }
-//
-//    public void initializeTimerTask() {
-//
-//        timerTask = new java.util.TimerTask() {
-//            public void run() {
-//                handler.post(new Runnable() {
-//                    public void run() {
-//
-//                    }
-//                });
-//            }
-//        };
-//    }
-//    stop timer:
-//    timer.cancel();
-//    timer = null;
-//    /********************/
-//    Toast.makeText(MapsActivity.this, "bearing:"+bearing, Toast.LENGTH_LONG).show();
 }
