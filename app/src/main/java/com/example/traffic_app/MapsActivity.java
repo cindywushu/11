@@ -74,7 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String url = "http://traffic-env.eennja8tqr.ap-northeast-1.elasticbeanstalk.com/";
 
     private static final long INTERVAL = 1000 * 2;//第一次執行時間2秒
-    private static final long FASTEST_INTERVAL = 1000 * 1;//第一次後每隔1秒執行一次
+    private static final long FASTEST_INTERVAL = 1000 * 7;//第一次後每隔1秒執行一次
     static TextView speedtext;//車速顯示的text
     static TextView distancetext;//距離顯示的text
     static LinearLayout fullscreen;
@@ -412,7 +412,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
     public void speed(){ //超速的提醒
-        if(speed>=110) { //國道規定最高速110~120
+        if(speed>=80) { //國道規定最高速110~120
             //使用聲音
             Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.speeding);
             // 取得NotificationManager系統服務
