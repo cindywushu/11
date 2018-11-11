@@ -512,7 +512,6 @@ public class InquireMapsActivity extends FragmentActivity implements OnMapReadyC
 
     public void goto_Inquire(View view) {
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        Intent intent=new Intent(InquireMapsActivity.this,InquireActivity.class);
-        startActivity(intent);
+        super.onBackPressed();
     }
 }

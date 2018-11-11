@@ -349,43 +349,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     List<Traffic> TrafficData = response.body();
 
                     for (int i = 0;i <= TrafficData.size();i++) {
-                        //資料庫的經緯度資料的點
-                        dbposition = new LatLng(Double.valueOf(TrafficData.get(i).getLatitude()), Double.valueOf(TrafficData.get(i).getLongitude()));
-                        //目前位置的經緯度
-                        Location yourposition_location = new Location("Yourposition");
-                        yourposition_location.setLatitude(yourposition.latitude);
-                        yourposition_location.setLongitude(yourposition.longitude);
-                        //資料庫點的經緯度
-                        Location dbposition_location = new Location("Dbposition");
-                        dbposition_location.setLatitude(dbposition.latitude);
-                        dbposition_location.setLongitude(dbposition.longitude);
-                        //計算距離
-                        distance = (yourposition_location.distanceTo(dbposition_location));
 
-                        if (all){ //若勾選全部或A1及A2
-                            if (TrafficData.get(i).getCategory().equals("A1")||TrafficData.get(i).getCategory().equals("A2")){
-                                if (distance<500){ //顯示所有距離500m內的點
-                                    MapsActivity.distancetext.setText("離危險路段距離約: " + new DecimalFormat("#.##").format(distance) + "公尺");
-                                    if (TrafficData.get(i).getCategory().equals("A1")){
-                                        addMarker_RED(); //A1類顯示紅點
-                                    }else {
-                                        addMarker_ORANGE(); //A2類顯示橘點
-                                    }
-                                    if (TrafficData.get(i).getDirection().equals("北向")) {
-                                        notification_north(); //北向提醒通知
-                                    }else if (TrafficData.get(i).getDirection().equals("南向")){
-                                        notification_south(); //南向提醒通知
-                                    }
-                                }
-                                if (distance<100){ //距離100m以內螢幕閃爍
-                                    manageBlinkEffect();
-                                }
-                            }
-                        }else if(A1){ //若勾選A1
+                        if (all||A1){
                             if (TrafficData.get(i).getCategory().equals("A1")){
+                                dbposition = new LatLng(Double.valueOf(TrafficData.get(i).getLatitude()), Double.valueOf(TrafficData.get(i).getLongitude()));
+                                //目前位置的經緯度
+                                Location yourposition_location = new Location("Yourposition");
+                                yourposition_location.setLatitude(yourposition.latitude);
+                                yourposition_location.setLongitude(yourposition.longitude);
+                                //資料庫點的經緯度
+                                Location dbposition_location = new Location("Dbposition");
+                                dbposition_location.setLatitude(dbposition.latitude);
+                                dbposition_location.setLongitude(dbposition.longitude);
+                                //計算距離
+                                distance = (yourposition_location.distanceTo(dbposition_location));
+
+                                mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(dbposition).title(TrafficData.get(i).getNums().toString()).icon(BitmapDescriptorFactory
+                                        .defaultMarker(BitmapDescriptorFactory.HUE_RED)));//Mark資料庫的點 HUE_RED/HUE_ORANGE
+
                                 if (distance<500){ //顯示所有距離500m內的點
                                     MapsActivity.distancetext.setText("離危險路段距離約: " + new DecimalFormat("#.##").format(distance) + "公尺");
-                                    addMarker_RED(); //A1類顯示紅點
+
                                     if (TrafficData.get(i).getDirection().equals("北向")) {
                                         notification_north(); //北向提醒通知
                                     }else if (TrafficData.get(i).getDirection().equals("南向")){
@@ -420,11 +404,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     getSystemService(NOTIFICATION_SERVICE);
             // 建立狀態列顯示的通知訊息
             NotificationCompat.Builder speed =
-                    new NotificationCompat.Builder(MapsActivity.this)
-                            .setSound(soundUri)
-                            .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("注意！")
-                            .setContentText("超速, 您已進入危險路段, 請減速！");
+                    new NotificationCompat.Builder(MapsActivity.this);
+            speed.setSound(soundUri);
+            speed.setContentTitle("注意！");
+            speed.setContentText("超速, 您已進入危險路段, 請減速！");
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                speed.setSmallIcon(R.drawable.ic_notifications_black_24dp);
+                speed.setColor(getResources().getColor(R.color.red));
+            } else {
+                speed.setSmallIcon(R.mipmap.ic_logo);
+            }
+
             Intent intent = new Intent(MapsActivity.this, NotificationActivity.class);
             intent.putExtra("NOTIFICATION_ID", NOTIF_ID);
             // 建立PendingIntent物件
@@ -452,11 +442,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getSystemService(NOTIFICATION_SERVICE);
         // 建立狀態列顯示的通知訊息
         NotificationCompat.Builder noti =
-                new NotificationCompat.Builder(MapsActivity.this)
-                        .setSound(soundUri)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("注意！")
-                        .setContentText("往北向 500公尺內為高危險區段,請小心駕駛");
+                new NotificationCompat.Builder(MapsActivity.this);
+        noti.setSound(soundUri);
+        noti.setContentTitle("注意！");
+        noti.setContentText("往北向 500公尺內為高危險區段,請小心駕駛");
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            noti.setSmallIcon(R.drawable.ic_notifications_black_24dp);
+            noti.setColor(getResources().getColor(R.color.red));
+        } else {
+            noti.setSmallIcon(R.mipmap.ic_logo);
+        }
         Intent intent = new Intent(MapsActivity.this, NotificationActivity.class);
         intent.putExtra("NOTIFICATION_ID", NOTIF_ID);
         // 建立PendingIntent物件
@@ -483,11 +478,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getSystemService(NOTIFICATION_SERVICE);
         // 建立狀態列顯示的通知訊息
         NotificationCompat.Builder noti =
-                new NotificationCompat.Builder(MapsActivity.this)
-                        .setSound(soundUri)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("注意！")
-                        .setContentText("往南向 500公尺內為高危險區段,請小心駕駛");
+                new NotificationCompat.Builder(MapsActivity.this);
+        noti.setSound(soundUri);
+        noti.setContentTitle("注意！");
+        noti.setContentText("往南向 500公尺內為高危險區段,請小心駕駛");
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            noti.setSmallIcon(R.drawable.ic_notifications_black_24dp);
+            noti.setColor(getResources().getColor(R.color.red));
+        } else {
+            noti.setSmallIcon(R.mipmap.ic_logo);
+        }
+
         Intent intent = new Intent(MapsActivity.this, NotificationActivity.class);
         intent.putExtra("NOTIFICATION_ID", NOTIF_ID);
         // 建立PendingIntent物件
@@ -506,15 +507,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         notiMgr.notify(NOTIF_ID, note);// 送出通知訊息
     }
 
-    public void addMarker_RED(){ //A1類顯示紅點
-        mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(dbposition).title("A1類").icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_RED)));//Mark資料庫的點 HUE_RED/HUE_ORANGE
-    }
-
-    public void addMarker_ORANGE(){ //A2類顯示橘點
-        mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(dbposition).title("A2類").icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));//Mark資料庫的點 HUE_RED/HUE_ORANGE
-    }
     @SuppressLint("WrongConstant")
     private void manageBlinkEffect() {
         anim = ObjectAnimator.ofInt(fullscreen, "backgroundColor", Color.alpha(00), Color.RED,
@@ -536,7 +528,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /********************/
     public void goto_Noti_selection(View view) { //回首頁的button, 按下會關閉服務並回首頁(MainActivity)
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        Intent intent=new Intent(MapsActivity.this,Noti_selectionActivity.class);
-        startActivity(intent);
+        super.onBackPressed();
     }
 }

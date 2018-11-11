@@ -1,5 +1,6 @@
 package com.example.traffic_app;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -84,7 +85,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent=new Intent(MainActivity.this,InquireActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
-
+            Intent intent=new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         }
