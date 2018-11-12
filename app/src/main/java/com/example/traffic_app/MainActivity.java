@@ -97,12 +97,12 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void goto_Noti_selection(View view) {
+    public void goto_Noti_selection(View view) { //選擇開始上路
         Intent intent=new Intent(MainActivity.this,Noti_selectionActivity.class);
         startActivity(intent);
     }
 
-    public void goto_Inquire(View view) {
+    public void goto_Inquire(View view) { //選擇危險路段查詢
         Intent intent=new Intent(MainActivity.this,InquireActivity.class);
         startActivity(intent);
     }
